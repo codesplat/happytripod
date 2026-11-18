@@ -1,0 +1,202 @@
+[
+  {
+    "id": "loc-001",
+    "title": "Osprey Dinner",
+    "description": "Great spot for capturing ospreys hunting along the rugged Mendocino coast.",
+    "county": "Mendocino County, California",
+    "lat": 39.4449,
+    "lng": -123.8053
+  },
+  {
+    "id": "loc-002",
+    "title": "Diablo Globe Lily",
+    "description": "Rare native wildflowers blooming along shaded trails in spring.",
+    "county": "Contra Costa County, California",
+    "lat": 37.8816,
+    "lng": -121.9142
+  },
+  {
+    "id": "loc-003",
+    "title": "View from Twin Peaks",
+    "description": "Sweeping 360-degree panoramic views across San Francisco and the Bay.",
+    "county": "San Francisco County, California",
+    "lat": 37.7544,
+    "lng": -122.4477
+  },
+  {
+    "id": "loc-004",
+    "title": "Battery Spencer Overlook",
+    "description": "Iconic elevated vantage point framing the Golden Gate Bridge and city skyline.",
+    "county": "Marin County, California",
+    "lat": 37.8277,
+    "lng": -122.4816
+  },
+  {
+    "id": "loc-005",
+    "title": "Coyote Hills Marsh Boardwalk",
+    "description": "Reflective salt marsh waters, migrating shorebirds, and golden hour reeds.",
+    "county": "Alameda County, California",
+    "lat": 37.5542,
+    "lng": -122.0894
+  },
+  {
+    "id": "loc-006",
+    "title": "Sunol Little Yosemite",
+    "description": "Cascading creek boulders and mossy oak woodlands ideal for long exposures.",
+    "county": "Alameda County, California",
+    "lat": 37.5085,
+    "lng": -121.8256
+  },
+  {
+    "id": "loc-007",
+    "title": "Bixby Creek Bridge Vista",
+    "description": "Dramatic coastal arch bridge spanning a steep canyon along Highway 1.",
+    "county": "Monterey County, California",
+    "lat": 36.3714,
+    "lng": -121.9017
+  },
+  {
+    "id": "loc-008",
+    "title": "Tunnel View",
+    "description": "Classic granite valley composition showcasing El Capitan, Half Dome, and Bridalveil Fall.",
+    "county": "Mariposa County, California",
+    "lat": 37.7156,
+    "lng": -119.6774
+  },
+  {
+    "id": "loc-009",
+    "title": "Bonsai Rock Lake Tahoe",
+    "description": "Lone pine perched atop a granite boulder in crystal-clear emerald waters.",
+    "county": "Washoe County, Nevada",
+    "lat": 39.1815,
+    "lng": -119.9272
+  },
+  {
+    "id": "loc-010",
+    "title": "Zabriskie Point Badlands",
+    "description": "Eroded golden mudstone ridges glowing under early morning desert light.",
+    "county": "Inyo County, California",
+    "lat": 36.4201,
+    "lng": -116.8122
+  },
+  {
+    "id": "loc-011",
+    "title": "Point Reyes Cypress Tree Tunnel",
+    "description": "Symmetrical canopy of Monterey cypress trees leading toward the historic radio station.",
+    "county": "Marin County, California",
+    "lat": 38.0954,
+    "lng": -122.9463
+  },
+  {
+    "id": "loc-012",
+    "title": "Shark Fin Cove",
+    "description": "Distinctive sea stack rising out of the surf beneath rugged coastal cliffs.",
+    "county": "Santa Cruz County, California",
+    "lat": 37.0019,
+    "lng": -122.1869
+  },
+  {
+    "id": "loc-013",
+    "title": "Mt. Tamalpais East Peak",
+    "description": "Above-the-fog sunset vistas overlooking the entire San Francisco Bay Area.",
+    "county": "Marin County, California",
+    "lat": 37.9291,
+    "lng": -122.5778
+  },
+  {
+    "id": "loc-014",
+    "title": "Mono Lake South Tufa",
+    "description": "Surreal limestone tufa towers reflected in calm alkaline waters at twilight.",
+    "county": "Mono County, California",
+    "lat": 37.9431,
+    "lng": -119.0275
+  },
+  {
+    "id": "loc-015",
+    "title": "Alabama Hills Mobius Arch",
+    "description": "Natural granite arch framing Mount Whitney and the jagged Sierra Nevada crest.",
+    "county": "Inyo County, California",
+    "lat": 36.6128,
+    "lng": -118.1264
+  },
+  {
+    "id": "loc-016",
+    "title": "Pigeon Point Lighthouse",
+    "description": "Historic coastal beacon perched on rocky tide pools battered by Pacific swells.",
+    "county": "San Mateo County, California",
+    "lat": 37.1817,
+    "lng": -122.3939
+  },
+  {
+    "id": "loc-017",
+    "title": "Mesa Arch Sunrise",
+    "description": "Glowing sandstone arch illuminated from below by reflected canyon dawn light.",
+    "county": "San Juan County, Utah",
+    "lat": 38.388,
+    "lng": -109.8635
+  },
+  {
+    "id": "loc-018",
+    "title": "White Sands Alkali Flat",
+    "description": "Endless undulating gypsum dunes creating stark minimalist shadow lines.",
+    "county": "Otero County, New Mexico",
+    "lat": 32.8152,
+    "lng": -106.2654
+  },
+  {
+    "id": "loc-019",
+    "title": "Carlsbad Big Room",
+    "description": "Subterranean limestone formations lit dramatically inside vast cavern chambers.",
+    "county": "Eddy County, New Mexico",
+    "lat": 32.1753,
+    "lng": -104.4439
+  },
+  {
+    "id": "loc-020",
+    "title": "Cannon Beach Haystack Rock",
+    "description": "Towering intertidal monolith mirrored in wet sand at low tide.",
+    "county": "Clatsop County, Oregon",
+    "lat": 45.8845,
+    "lng": -123.9685
+  },
+  {
+    "id": "loc-021",
+    "title": "Reflection Lakes Rainier",
+    "description": "Mirror-like alpine waters reflecting snow-clad Mount Rainier on windless mornings.",
+    "county": "Lewis County, Washington",
+    "lat": 46.7686,
+    "lng": -121.7303
+  },
+  {
+    "id": "loc-022",
+    "title": "Oxbow Bend Snake River",
+    "description": "Serene river bend framed by golden autumn aspens and Mount Moran.",
+    "county": "Teton County, Wyoming",
+    "lat": 43.8663,
+    "lng": -110.5477
+  },
+  {
+    "id": "loc-023",
+    "title": "Horseshoe Bend Overlook",
+    "description": "Emerald Colorado River looping 270 degrees around a towering sandstone escarpment.",
+    "county": "Coconino County, Arizona",
+    "lat": 36.8791,
+    "lng": -111.5104
+  },
+  {
+    "id": "loc-024",
+    "title": "Mission Peak Summit Pole",
+    "description": "Steep ridge trail culminating in panoramic views over Fremont and the South Bay.",
+    "county": "Alameda County, California",
+    "lat": 37.5125,
+    "lng": -121.8806
+  },
+  {
+    "id": "loc-025",
+    "title": "Alviso Marina Salt Ponds",
+    "description": "Vibrant magenta and teal evaporation ponds crisscrossed by wooden boardwalks.",
+    "county": "Santa Clara County, California",
+    "lat": 37.4283,
+    "lng": -121.9767
+  }
+]

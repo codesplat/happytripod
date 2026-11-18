@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HappyTripod</title>
+    <meta name="description" content="An application to help you find places to take photos">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📷</text></svg>">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="theRootContainer">
+        <!-- Header Matching Exact Reference Layout -->
+        <header class="header">
+            <div class="headerTopRow">
+                <a href="#home" class="brandLink">
+                    <span class="brandIcon">📷</span>
+                    <span class="headerBannerText">Happy Tripod</span>
+                </a>
+                <div class="locationCount" id="locationCountDisplay">xx locations<br>worldwide</div>
+            </div>
+            <nav class="headerNav" aria-label="Primary Navigation">
+                <button class="nav-btn active" data-target="home" onclick="window.location.hash='#home'">Home</button>
+                <button class="nav-btn" data-target="explore" onclick="window.location.hash='#explore'">Explore</button>
+                <button class="nav-btn" data-target="routing" onclick="window.location.hash='#routing'">Routing</button>
+                <button class="nav-btn" data-target="add" onclick="window.location.hash='#add'">Add Spot</button>
+                <button class="nav-btn" data-target="about" onclick="window.location.hash='#about'">About</button>
+            </nav>
+        </header>
+
+        <!-- Main Dynamic View Container -->
+        <main id="appMain" class="mainContainer">
+            <!-- Dynamically rendered views load here -->
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div>Happy Tripod 2026</div>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

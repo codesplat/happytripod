@@ -1,0 +1,507 @@
+:root {
+  --neon-purple: #8A2BE2;
+  --electric-teal: #00F5D4;
+  --hot-pink: #FF007F;
+  --bg-dark: #121212;
+  --bg-card: #1e1e1e;
+  --text-main: #ffffff;
+  --text-muted: #b0b0b0;
+  --border-color: rgba(255, 255, 255, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.theRootContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Header Matching Exact Reference Image Layout */
+.header {
+  display: flex;
+  flex-direction: column;
+  padding: 14px 24px;
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  gap: 12px;
+}
+
+.headerTopRow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.brandLink {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brandIcon {
+  font-size: 1.5rem;
+}
+
+.headerBannerText {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--electric-teal);
+  letter-spacing: -0.5px;
+}
+
+.locationCount {
+  font-size: 0.8rem;
+  line-height: 1.2;
+  color: var(--electric-teal);
+  font-weight: 500;
+}
+
+.headerNav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.nav-btn {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 6px 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 400;
+  transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+  border-color: var(--electric-teal);
+  color: var(--electric-teal);
+}
+
+.nav-btn.active {
+  background-color: var(--neon-purple);
+  border-color: var(--neon-purple);
+  color: #ffffff;
+}
+
+/* Main Container */
+.mainContainer {
+  flex: 1;
+  padding: 24px;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* Home View: Banner & Carousel */
+.homeBanner {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  margin-bottom: 28px;
+  background: linear-gradient(135deg, #240b36, #1a1a2e);
+}
+
+.homeBanner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.homeBannerOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(18, 18, 18, 0.85), rgba(18, 18, 18, 0.2));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+}
+
+.homeBannerOverlay h1 {
+  font-size: 2rem;
+  color: var(--electric-teal);
+  margin-bottom: 6px;
+}
+
+.homeBannerOverlay p {
+  color: var(--text-main);
+  font-size: 1rem;
+}
+
+/* Carousel Section */
+.carouselSection {
+  margin-bottom: 32px;
+}
+
+.sectionHeading {
+  font-size: 1.25rem;
+  color: var(--electric-teal);
+  margin-bottom: 14px;
+}
+
+.carouselWrapper {
+  position: relative;
+  width: 100%;
+  height: 360px;
+  background-color: var(--bg-card);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carouselSlide {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.carouselSlide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carouselFallback {
+  padding: 24px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.carouselBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(18, 18, 18, 0.75);
+  color: var(--electric-teal);
+  border: 1px solid var(--electric-teal);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.carouselBtn:hover {
+  background: var(--neon-purple);
+  color: #fff;
+  border-color: var(--neon-purple);
+}
+
+.carouselBtn.prev {
+  left: 14px;
+}
+
+.carouselBtn.next {
+  right: 14px;
+}
+
+.carouselIndicators {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.carouselDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  cursor: pointer;
+}
+
+.carouselDot.active {
+  background: var(--hot-pink);
+  transform: scale(1.2);
+}
+
+/* Explore View (Card Grid without Map) */
+.exploreHeaderBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 240px;
+  max-width: 420px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-main);
+  font-size: 0.95rem;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--electric-teal);
+}
+
+.exploreGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.locationCard {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: border-color 0.2s, transform 0.15s;
+}
+
+.locationCard:hover {
+  border-color: var(--electric-teal);
+  transform: translateY(-2px);
+}
+
+.locationCard h3 {
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+  color: var(--electric-teal);
+}
+
+.locationCard p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.locationCardMeta {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--neon-purple);
+  font-weight: 600;
+}
+
+.viewOnMapLink {
+  background: transparent;
+  border: 1px solid var(--hot-pink);
+  color: var(--hot-pink);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.viewOnMapLink:hover {
+  background: var(--hot-pink);
+  color: #fff;
+}
+
+/* Routing View (Controls + Interactive Map) */
+.routingSplitLayout {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 20px;
+  min-height: calc(100vh - 160px);
+}
+
+@media (max-width: 900px) {
+  .routingSplitLayout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.routingSidebar {
+  background: var(--bg-card);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.mapContainer {
+  width: 100%;
+  height: 100%;
+  min-height: 450px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+  min-height: 450px;
+}
+
+/* Add Location Form */
+.formContainer {
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--bg-card);
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.formGroup {
+  margin-bottom: 14px;
+}
+
+.formGroup label {
+  display: block;
+  font-size: 0.88rem;
+  margin-bottom: 6px;
+  color: var(--text-muted);
+}
+
+.formGroup input, .formGroup textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background: #161616;
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+.submit-btn {
+  background-color: var(--hot-pink);
+  color: white;
+  border: none;
+  padding: 11px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  font-size: 0.95rem;
+}
+
+.submit-btn:hover {
+  opacity: 0.92;
+}
+
+/* About Page Layout */
+.aboutContainer {
+  max-width: 780px;
+  margin: 0 auto;
+  background: var(--bg-card);
+  padding: 32px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  line-height: 1.65;
+}
+
+.aboutHeading {
+  font-size: 1.6rem;
+  color: var(--electric-teal);
+  margin-bottom: 16px;
+}
+
+.aboutSubHeading {
+  font-size: 1.35rem;
+  color: var(--hot-pink);
+  margin-top: 28px;
+  margin-bottom: 14px;
+}
+
+.aboutFigure {
+  margin: 18px 0 24px 0;
+  text-align: center;
+}
+
+.aboutFigure img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.aboutFigure figcaption {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.aboutParagraph {
+  margin-bottom: 14px;
+  color: var(--text-main);
+}
+
+.aboutList {
+  margin: 12px 0 20px 28px;
+  color: var(--text-main);
+}
+
+.aboutList li {
+  margin-bottom: 8px;
+}
+
+.aboutLink {
+  color: var(--electric-teal);
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 14px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  background-color: var(--bg-card);
+  border-top: 1px solid var(--border-color);
+}
