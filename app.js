@@ -7,7 +7,9 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-const STORAGE_KEY = 'happy_tripod_locations_v1_3_1_alpha';
+const APP_VERSION = 'v1.4.2-alpha';
+const STORAGE_KEY = 'happy_tripod_locations_v1_4_2_alpha';
+const MODE_STORAGE_KEY = 'happy_tripod_detail_mode';
 
 const CAROUSEL_IMAGES = [
     { src: 'images/carousel/carousel-1.jpg', caption: 'Golden Hour Landscapes' },
@@ -18,6 +20,7 @@ const CAROUSEL_IMAGES = [
 
 const state = {
     currentView: 'home',
+    detailMode: localStorage.getItem(MODE_STORAGE_KEY) || 'concise',
     locations: [],
     searchQuery: '',
     carouselIndex: 0,
@@ -52,6 +55,23 @@ async function loadLocations() {
     }
 }
 
+function setDetailMode(mode) {
+    state.detailMode = mode;
+    localStorage.setItem(MODE_STORAGE_KEY, mode);
+    updateModeButtons();
+    renderView();
+}
+
+function updateModeButtons() {
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+        if (btn.dataset.mode === state.detailMode) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+}
+
 function router() {
     const hash = window.location.hash.replace('#', '') || 'home';
     state.currentView = hash;
@@ -76,6 +96,11 @@ function renderView() {
         countDisplay.innerHTML = `${state.locations.length} locations<br>worldwide`;
     }
 
+    const versionBadge = document.getElementById('appVersionBadge');
+    if (versionBadge) {
+        versionBadge.textContent = APP_VERSION;
+    }
+
     if (state.currentView === 'home') {
         renderHomeView(main);
     } else if (state.currentView === 'explore') {
@@ -91,24 +116,51 @@ function renderView() {
     }
 }
 
+function buildLocationCardHTML(loc) {
+    const isVerbose = state.detailMode === 'verbose';
+    const verboseBlock = isVerbose ? `
+        <div class="verboseDetails">
+            <div><strong>ID:</strong> ${loc.id}</div>
+            <div><strong>Coordinates:</strong> ${Number(loc.lat).toFixed(4)}&deg;, ${Number(loc.lng).toFixed(4)}&deg;</div>
+        </div>
+    ` : '';
+
+    return `
+        <div class="locationCard">
+            <div>
+                <h3>${loc.title}</h3>
+                <p>${loc.description}</p>
+                ${verboseBlock}
+            </div>
+            <div class="locationCardMeta">
+                <span>${loc.county}</span>
+                <button type="button" class="viewOnMapLink" onclick="openLocationOnMap('${loc.id}')">View on Map</button>
+            </div>
+        </div>
+    `;
+}
+
 function renderHomeView(container) {
     const recentSpots = state.locations.slice(0, 4);
+    const bannerSubtext = state.detailMode === 'verbose'
+        ? 'Explore 25+ curated photography locations across California and the American West, inspect GPS coordinates, and plan scenic routes.'
+        : 'Explore curated photography locations and plan scenic routes anywhere on earth.';
 
     container.innerHTML = `
         <section class="homeBanner">
-            <img src="images/banner/banner-12.jpg" alt="Happy Tripod Banner" onerror="this.style.display='none'">
+            <img src="images/banner/banner-1.jpg" alt="Happy Tripod Banner" onerror="this.style.display='none'">
             <div class="homeBannerOverlay">
                 <h1>Find your best photo today!</h1>
-                <p>Explore curated photography locations and plan scenic routes anywhere on earth.</p>
+                <p>${bannerSubtext}</p>
             </div>
         </section>
 
         <section class="carouselSection">
             <h2 class="sectionHeading">Featured Photo Inspiration</h2>
             <div class="carouselWrapper" id="carouselContainer">
-                <button class="carouselBtn prev" aria-label="Previous slide" onclick="stepCarousel(-1)">&#10094;</button>
+                <button type="button" class="carouselBtn prev" aria-label="Previous slide" onclick="stepCarousel(-1)">&#10094;</button>
                 <div class="carouselSlide" id="carouselSlideContent"></div>
-                <button class="carouselBtn next" aria-label="Next slide" onclick="stepCarousel(1)">&#10095;</button>
+                <button type="button" class="carouselBtn next" aria-label="Next slide" onclick="stepCarousel(1)">&#10095;</button>
                 <div class="carouselIndicators" id="carouselDots"></div>
             </div>
         </section>
@@ -116,18 +168,7 @@ function renderHomeView(container) {
         <section>
             <h2 class="sectionHeading">Most Recent Submissions</h2>
             <div class="exploreGrid">
-                ${recentSpots.map(loc => `
-                    <div class="locationCard">
-                        <div>
-                            <h3>${loc.title}</h3>
-                            <p>${loc.description}</p>
-                        </div>
-                        <div class="locationCardMeta">
-                            <span>${loc.county}</span>
-                            <button class="viewOnMapLink" onclick="openLocationOnMap('${loc.id}')">View on Map</button>
-                        </div>
-                    </div>
-                `).join('')}
+                ${recentSpots.map(loc => buildLocationCardHTML(loc)).join('')}
             </div>
         </section>
     `;
@@ -141,13 +182,18 @@ function updateCarouselSlide() {
     if (!slideEl || !dotsEl) return;
 
     const current = CAROUSEL_IMAGES[state.carouselIndex];
+    const verboseCaption = state.detailMode === 'verbose'
+        ? `<div class="carouselCaptionBar">${current.caption} (${state.carouselIndex + 1} of ${CAROUSEL_IMAGES.length})</div>`
+        : '';
+
     slideEl.innerHTML = `
         <img src="${current.src}" alt="${current.caption}"
-             onerror="this.parentElement.innerHTML='<div class='carouselFallback'><strong>${current.caption}</strong><br><small>Add image file: ${current.src}</small></div>'">
+             onerror="this.parentElement.innerHTML='<div class=\'carouselFallback\'><strong>${current.caption}</strong><br><small>Add image file: ${current.src}</small></div>'">
+        ${verboseCaption}
     `;
 
     dotsEl.innerHTML = CAROUSEL_IMAGES.map((_, idx) => `
-        <button class="carouselDot ${idx === state.carouselIndex ? 'active' : ''}"
+        <button type="button" class="carouselDot ${idx === state.carouselIndex ? 'active' : ''}"
                 aria-label="Slide ${idx + 1}"
                 onclick="setCarouselSlide(${idx})"></button>
     `).join('');
@@ -186,18 +232,7 @@ function renderExploreView(container) {
                    value="${state.searchQuery}">
         </div>
         <div class="exploreGrid" id="exploreCardsGrid">
-            ${filtered.map(loc => `
-                <div class="locationCard">
-                    <div>
-                        <h3>${loc.title}</h3>
-                        <p>${loc.description}</p>
-                    </div>
-                    <div class="locationCardMeta">
-                        <span>${loc.county}</span>
-                        <button class="viewOnMapLink" onclick="openLocationOnMap('${loc.id}')">View on Map</button>
-                    </div>
-                </div>
-            `).join('')}
+            ${filtered.map(loc => buildLocationCardHTML(loc)).join('')}
         </div>
     `;
 
@@ -216,12 +251,16 @@ function renderExploreView(container) {
 }
 
 function renderRoutingView(container) {
+    const helperCopy = state.detailMode === 'verbose'
+        ? 'Enter a starting point and destination, then adjust the maximum off-route corridor radius in miles to filter nearby photography locations.'
+        : 'Plan your route waypoints and inspect photography locations on the map.';
+
     container.innerHTML = `
         <div class="routingSplitLayout">
             <div class="routingSidebar">
                 <h2 style="color: var(--electric-teal);">Route & Map Explorer</h2>
                 <p style="color: var(--text-muted); font-size: 0.9rem;">
-                    Plan your route waypoints and inspect photography locations on the map.
+                    ${helperCopy}
                 </p>
                 <div class="formGroup">
                     <label>Start Location</label>
@@ -233,10 +272,10 @@ function renderRoutingView(container) {
                 </div>
                 <div class="formGroup">
                     <label id="distanceLabel">Off-route distance (miles): 5</label>
-                    <input type="range" min="0" max="50" value="5" style="width:100%;"
+                    <input type="range" min="0" max="50" value="5"
                            oninput="document.getElementById('distanceLabel').textContent = 'Off-route distance (miles): ' + this.value">
                 </div>
-                <button class="submit-btn" onclick="alert('Route calculation simulated! Showing all available locations on map.')">
+                <button type="button" class="submit-btn" onclick="alert('Route calculation simulated! Showing all available locations on map.')">
                     Find Spots Along Route
                 </button>
             </div>
@@ -260,8 +299,11 @@ function renderRoutingView(container) {
         const markersById = {};
         state.locations.forEach(loc => {
             if (loc.lat && loc.lng) {
+                const coordsNote = state.detailMode === 'verbose'
+                    ? `<br><small>${Number(loc.lat).toFixed(4)}, ${Number(loc.lng).toFixed(4)}</small>`
+                    : '';
                 const marker = L.marker([loc.lat, loc.lng]).addTo(map)
-                    .bindPopup(`<b>${loc.title}</b><br>${loc.description}<br><i>${loc.county}</i>`);
+                    .bindPopup(`<b>${loc.title}</b><br>${loc.description}<br><i>${loc.county}</i>${coordsNote}`);
                 markersById[loc.id] = marker;
             }
         });
@@ -278,9 +320,14 @@ function renderRoutingView(container) {
 }
 
 function renderAddView(container) {
+    const tipBanner = state.detailMode === 'verbose'
+        ? `<p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 16px;">Tip: Use decimal degrees for Latitude (e.g., 37.5483) and Longitude (e.g., -121.9886). Saved locations are stored locally in your browser.</p>`
+        : '';
+
     container.innerHTML = `
         <div class="formContainer">
-            <h2 style="color: var(--hot-pink); margin-bottom: 16px;">Share a Photo Location</h2>
+            <h2 style="color: var(--hot-pink); margin-bottom: 12px;">Share a Photo Place</h2>
+            ${tipBanner}
             <form id="addLocationForm" onsubmit="handleLocationSubmit(event)">
                 <div class="formGroup">
                     <label>Location Title</label>
@@ -302,7 +349,7 @@ function renderAddView(container) {
                     <label>Longitude</label>
                     <input type="number" step="any" id="locLng" required placeholder="-121.9886">
                 </div>
-                <button type="submit" class="submit-btn">Save Location</button>
+                <button type="submit" class="submit-btn">Save Place</button>
             </form>
         </div>
     `;
@@ -321,7 +368,7 @@ function handleLocationSubmit(e) {
 
     state.locations.unshift(newLoc);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state.locations));
-    alert('Location successfully added!');
+    alert('Place successfully added!');
     window.location.hash = '#explore';
 }
 
@@ -330,7 +377,7 @@ function renderAboutView(container) {
         <article class="aboutContainer">
             <h1 class="aboutHeading">Why HappyTripod?</h1>
             <figure class="aboutFigure">
-                <img src="about.jpg" alt="Curious Mike fighting for the image">
+                <img src="images/about/about.jpg" alt="Curious Mike fighting for the image">
                 <figcaption>Curious Mike fighting for the image</figcaption>
             </figure>
 
@@ -350,7 +397,7 @@ function renderAboutView(container) {
 
             <h2 class="aboutSubHeading">We need your help.</h2>
             <figure class="aboutFigure">
-                <img src="aboutfooter.jpg" alt="I'm going to build a new website honey!">
+                <img src="images/about/aboutfooter.jpg" alt="I'm going to build a new website honey!">
                 <figcaption>I'm going to build a new website honey!</figcaption>
             </figure>
 
@@ -371,13 +418,14 @@ function renderAboutView(container) {
                 <a href="mailto:codesplat@gmail.com?subject=Happy%20Tripod%20Feedback" class="aboutLink">Email me</a>
             </p>
             <p class="aboutParagraph" style="margin-top: 20px; font-weight: 600; color: var(--text-muted);">
-                Happy Tripod 2026
+                Happy Tripod 2026 &bull; ${APP_VERSION}
             </p>
         </article>
     `;
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
+    updateModeButtons();
     await loadLocations();
     if (!window.location.hash) {
         window.location.hash = '#home';

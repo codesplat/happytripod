@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HappyTripod</title>
+    <title>HappyTripod v1.4.2-alpha</title>
     <meta name="description" content="An application to help you find places to take photos">
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📷</text></svg>">
@@ -12,21 +12,28 @@
 </head>
 <body>
     <div class="theRootContainer">
-        <!-- Header Matching Exact Reference Layout -->
+        <!-- Header -->
         <header class="header">
             <div class="headerTopRow">
-                <a href="#home" class="brandLink">
-                    <span class="brandIcon">📷</span>
-                    <span class="headerBannerText">Happy Tripod</span>
-                </a>
-                <div class="locationCount" id="locationCountDisplay">xx locations<br>worldwide</div>
+                <div class="brandCluster">
+                    <a href="#home" class="brandLink">
+                        <span class="brandIcon">📷</span>
+                        <span class="headerBannerText">Happy Tripod</span>
+                    </a>
+                    <span class="versionBadge" id="appVersionBadge">v1.4.2-alpha</span>
+                    <div class="locationCount" id="locationCountDisplay">xx locations<br>worldwide</div>
+                </div>
+                <div class="modeToggleGroup" role="group" aria-label="Information Detail Mode">
+                    <button type="button" class="mode-btn active" data-mode="concise" onclick="setDetailMode('concise')">Concise</button>
+                    <button type="button" class="mode-btn" data-mode="verbose" onclick="setDetailMode('verbose')">Verbose</button>
+                </div>
             </div>
             <nav class="headerNav" aria-label="Primary Navigation">
-                <button class="nav-btn active" data-target="home" onclick="window.location.hash='#home'">Home</button>
-                <button class="nav-btn" data-target="explore" onclick="window.location.hash='#explore'">Explore</button>
-                <button class="nav-btn" data-target="routing" onclick="window.location.hash='#routing'">Routing</button>
-                <button class="nav-btn" data-target="add" onclick="window.location.hash='#add'">Add Spot</button>
-                <button class="nav-btn" data-target="about" onclick="window.location.hash='#about'">About</button>
+                <button type="button" class="nav-btn active" data-target="home" onclick="window.location.hash='#home'">Home</button>
+                <button type="button" class="nav-btn" data-target="explore" onclick="window.location.hash='#explore'">Explore</button>
+                <button type="button" class="nav-btn" data-target="routing" onclick="window.location.hash='#routing'">Routing</button>
+                <button type="button" class="nav-btn" data-target="add" onclick="window.location.hash='#add'">Add Place</button>
+                <button type="button" class="nav-btn" data-target="about" onclick="window.location.hash='#about'">About</button>
             </nav>
         </header>
 
@@ -37,7 +44,7 @@
 
         <!-- Footer -->
         <footer class="footer">
-            <div>Happy Tripod 2026</div>
+            <div>Happy Tripod 2026 &bull; v1.4.2-alpha</div>
         </footer>
     </div>
 

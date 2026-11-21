@@ -1,4 +1,4 @@
-const CACHE_NAME = 'happytripod-v1.3.1-alpha';
+const CACHE_NAME = 'happytripod-v1.4.2-alpha';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
